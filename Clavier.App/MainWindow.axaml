@@ -1,0 +1,157 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="1200"
+        d:DesignHeight="760"
+        x:Class="Clavier.App.MainWindow"
+        Title="Clavier Lenovo T14 Gen 1"
+        Width="1200"
+        Height="760"
+        MinWidth="640"
+        MinHeight="420"
+        Background="#202124">
+    <Window.Styles>
+        <Style Selector="ToggleButton.accent-toggle">
+            <Setter Property="Background" Value="#34363A" />
+            <Setter Property="Foreground" Value="#F1F3F4" />
+            <Setter Property="BorderBrush" Value="#5F6368" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,6,6" />
+        </Style>
+        <Style Selector="ToggleButton.accent-toggle:checked">
+            <Setter Property="Background" Value="#257A42" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#3DAD63" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0"
+                Padding="24"
+                BorderBrush="#34363A"
+                BorderThickness="0,0,0,1">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Lenovo ThinkPad T14 Gen 1"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           Foreground="#F1F3F4" />
+                <TextBlock Text="Disposition du clavier"
+                           FontSize="14"
+                           Foreground="#AEB4BC" />
+                <WrapPanel x:Name="CharacterButtonsPanel">
+                    <ToggleButton Classes="accent-toggle" Content="À" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="à" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Â" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="â" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+
+                    <ToggleButton Classes="accent-toggle" Content="Ç" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ç" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+
+                    <ToggleButton Classes="accent-toggle" Content="É" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="é" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="È" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="è" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Ê" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ê" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Ë" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ë" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+
+                    <ToggleButton Classes="accent-toggle" Content="Î" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="î" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Ï" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ï" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+
+                    <ToggleButton Classes="accent-toggle" Content="Ô" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ô" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Œ" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="œ" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+
+                    <ToggleButton Classes="accent-toggle" Content="Ù" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="ù" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="Û" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                    <ToggleButton Classes="accent-toggle" Content="û" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="#151617">
+            <Viewbox Stretch="Uniform">
+                <Grid Width="1500" Height="693">
+                    <Image Source="avares://Clavier/Assets/clavier-lenovo-t14-gen1.jpg"
+                           Stretch="Fill" />
+                    <Canvas x:Name="KeyboardOverlay"
+                            Width="1500"
+                            Height="693"
+                            IsHitTestVisible="False"
+                            SizeChanged="KeyboardOverlay_OnSizeChanged">
+                        <Border x:Name="GreenKeyMarker"
+                                IsVisible="False"
+                                BorderBrush="#00E676"
+                                BorderThickness="3"
+                                Background="#3300E676">
+                            <TextBlock Text="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#00E676" />
+                        </Border>
+                        <Border x:Name="ShiftKeyMarker"
+                                IsVisible="False"
+                                BorderBrush="#00E676"
+                                BorderThickness="3"
+                                Background="#3300E676">
+                            <TextBlock Text="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#00E676" />
+                        </Border>
+                        <Border x:Name="BlueShiftKeyMarker"
+                                IsVisible="False"
+                                BorderBrush="#2196F3"
+                                BorderThickness="3"
+                                Background="#332196F3">
+                            <TextBlock Text="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#2196F3" />
+                        </Border>
+                        <Border x:Name="BlueAltGrMarker"
+                                IsVisible="False"
+                                BorderBrush="#2196F3"
+                                BorderThickness="3"
+                                Background="#332196F3">
+                            <TextBlock Text="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#2196F3" />
+                        </Border>
+                        <Border x:Name="BlueKeyMarker"
+                                IsVisible="False"
+                                BorderBrush="#2196F3"
+                                BorderThickness="3"
+                                Background="#332196F3">
+                            <TextBlock Text="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#2196F3" />
+                        </Border>
+                    </Canvas>
+                </Grid>
+            </Viewbox>
+        </Border>
+    </Grid>
+</Window>
