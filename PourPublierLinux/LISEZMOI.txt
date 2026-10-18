@@ -1,0 +1,17 @@
+Publication Linux de Clavier
+
+1. Publiez l'application pour Linux (par exemple avec `dotnet publish -c Release -r linux-x64 --self-contained true`).
+2. Copiez tous les fichiers produits par la publication dans ce repertoire, a cote de `installer-linux.sh` et `keyboard-icon.png`.
+   Le binaire lanceur doit s'appeler `Clavier`.
+3. Depuis un terminal Linux, rendez le script executable et lancez-le :
+   chmod +x installer-linux.sh
+   ./installer-linux.sh
+
+Le script installe l'application dans ~/.local/opt/clavier, son icone dans
+~/.local/share/icons/hicolor/256x256/apps et son lanceur dans
+~/.local/share/applications. Il n'a pas besoin des droits administrateur.
+
+Le lanceur du menu supprime les variables d'environnement de l'IME Linux pour 
+contourner un probleme Avalonia/IBus avec les accents composes.
+Si Clavier est deja installe, relancez ce script apres avoir copie les nouveaux 
+fichiers de publication afin de mettre a jour son lanceur.

@@ -6,6 +6,8 @@
         d:DesignWidth="1200"
         d:DesignHeight="760"
         x:Class="Clavier.App.MainWindow"
+        Icon="avares://Clavier/Assets/keyboard-icon.ico"
+        RequestedThemeVariant="Dark"
         Title="Clavier Lenovo T14 Gen 1"
         Width="1200"
         Height="760"
@@ -14,6 +16,7 @@
         Background="#202124">
     <Window.Styles>
         <Style Selector="ToggleButton.accent-toggle">
+            <Setter Property="Focusable" Value="False" />
             <Setter Property="Background" Value="#34363A" />
             <Setter Property="Foreground" Value="#F1F3F4" />
             <Setter Property="BorderBrush" Value="#5F6368" />
@@ -36,13 +39,6 @@
                 BorderBrush="#34363A"
                 BorderThickness="0,0,0,1">
             <StackPanel Spacing="10">
-                <TextBlock Text="Lenovo ThinkPad T14 Gen 1"
-                           FontSize="22"
-                           FontWeight="SemiBold"
-                           Foreground="#F1F3F4" />
-                <TextBlock Text="Disposition du clavier"
-                           FontSize="14"
-                           Foreground="#AEB4BC" />
                 <WrapPanel x:Name="CharacterButtonsPanel">
                     <ToggleButton Classes="accent-toggle" Content="À" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
                     <ToggleButton Classes="accent-toggle" Content="à" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
@@ -76,6 +72,37 @@
                     <ToggleButton Classes="accent-toggle" Content="Û" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
                     <ToggleButton Classes="accent-toggle" Content="û" Width="48" Height="40" FontSize="20" Click="CombinationToggleButton_OnClick" />
                 </WrapPanel>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalAlignment="Center">
+                    <TextBlock Grid.Column="0"
+                               Text="Essayer :"
+                               Foreground="#AEB4BC"
+                               VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1"
+                             x:Name="TestInputBox"
+                             InputMethod.IsInputMethodEnabled="True"
+                             MinHeight="40"
+                             Padding="10,8"
+                             Background="#34363A"
+                             Foreground="#F1F3F4"
+                             BorderBrush="#5F6368"
+                             CornerRadius="6">
+                        <TextBox.ContextMenu>
+                            <ContextMenu MaxHeight="500"
+                                         MinWidth="190"
+                                         Placement="Bottom"
+                                         PlacementConstraintAdjustment="FlipY, SlideX">
+                                <MenuItem Header="Annuler" Click="TestInputBoxUndo_OnClick" />
+                                <MenuItem Header="Rétablir" Click="TestInputBoxRedo_OnClick" />
+                                <Separator />
+                                <MenuItem Header="Couper" Click="TestInputBoxCut_OnClick" />
+                                <MenuItem Header="Copier" Click="TestInputBoxCopy_OnClick" />
+                                <MenuItem Header="Coller" Click="TestInputBoxPaste_OnClick" />
+                                <Separator />
+                                <MenuItem Header="Tout sélectionner" Click="TestInputBoxSelectAll_OnClick" />
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
             </StackPanel>
         </Border>
 

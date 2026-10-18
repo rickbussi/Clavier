@@ -2,7 +2,10 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Primitives.PopupPositioning;
 using Avalonia.Interactivity;
+using Avalonia.Input;
+using Avalonia.Input.Platform;
 
 namespace Clavier.App;
 
@@ -11,7 +14,50 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        AddCharacterButtonContextMenus();
+        Opened += (_, _) => TestInputBox.Focus();
     }
+
+    private void AddCharacterButtonContextMenus()
+    {
+        foreach (var child in CharacterButtonsPanel.Children)
+        {
+            if (child is not ToggleButton button || button.Content is not string character)
+            {
+                continue;
+            }
+
+            var copyItem = new MenuItem { Header = "Copier le caractère" };
+            copyItem.Click += async (_, _) =>
+            {
+                var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
+                if (clipboard is not null)
+                {
+                    await clipboard.SetTextAsync(character);
+                }
+            };
+
+            button.ContextMenu = new ContextMenu
+            {
+                Placement = PlacementMode.Bottom,
+                PlacementConstraintAdjustment = PopupPositionerConstraintAdjustment.FlipY |
+                                                PopupPositionerConstraintAdjustment.SlideX,
+                Items = { copyItem }
+            };
+        }
+    }
+
+    private void TestInputBoxUndo_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.Undo();
+
+    private void TestInputBoxRedo_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.Redo();
+
+    private void TestInputBoxCut_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.Cut();
+
+    private void TestInputBoxCopy_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.Copy();
+
+    private void TestInputBoxPaste_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.Paste();
+
+    private void TestInputBoxSelectAll_OnClick(object? sender, RoutedEventArgs e) => TestInputBox.SelectAll();
 
     private void CombinationToggleButton_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -27,6 +73,10 @@ public partial class MainWindow : Window
         }
 
         UpdateMarkers();
+        if (!TestInputBox.IsFocused)
+        {
+            TestInputBox.Focus();
+        }
     }
 
     private void KeyboardOverlay_OnSizeChanged(object? sender, SizeChangedEventArgs e)
