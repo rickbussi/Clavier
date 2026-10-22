@@ -1,9 +1,9 @@
 Publication Linux de Clavier
 
-1. Publiez l'application pour Linux (par exemple avec `dotnet publish -c Release -r linux-x64 --self-contained true`).
-2. Copiez tous les fichiers produits par la publication dans ce repertoire, a cote de `installer-linux.sh` et `keyboard-icon.png`.
-   Le binaire lanceur doit s'appeler `Clavier`.
-3. Depuis un terminal Linux, rendez le script executable et lancez-le :
+1. Depuis PowerShell, a la racine du projet, publiez avec le SDK .NET 10 :
+   `dotnet publish .\Clavier.App\Clavier.App.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o .\publish\linux-x64`
+2. Copiez tout le contenu de `publish/linux-x64` vers votre machine Linux. Il contient le binaire `Clavier`, `installer-linux.sh` et `keyboard-icon.png`.
+3. Depuis un terminal Linux dans le repertoire copie, rendez le script executable et lancez-le :
    chmod +x installer-linux.sh
    ./installer-linux.sh
 
