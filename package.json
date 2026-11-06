@@ -1,0 +1,38 @@
+{
+  "name": "clavier",
+  "version": "1.0.0",
+  "description": "Clavier Lenovo ThinkPad T14 Gen 1",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --base-href /",
+    "watch": "ng build --watch --configuration development",
+    "desktop": "npm run build && electron .",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "dist:linux": "npm run build && electron-builder --linux tar.gz"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.0",
+  "dependencies": {
+    "@angular/common": "^22.2.0", "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0", "@angular/platform-browser": "^22.2.0",
+    "rxjs": "~7.8.0", "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.5", "@angular/cli": "^22.2.5",
+    "@angular/compiler-cli": "^22.2.0", "electron": "^45.1.0",
+    "electron-builder": "^26.0.0", "typescript": "~6.0.2"
+  },
+  "build": {
+    "appId": "ca.clavier.app", "productName": "Clavier",
+    "directories": { "output": "release" },
+    "files": ["dist/clavier-web/browser/**/*", "electron/**/*", "package.json"],
+    "extraFiles": [
+      { "from": "scripts/install-linux.sh", "to": "install.sh" },
+      { "from": "public/assets/keyboard-icon.png", "to": "keyboard-icon.png" }
+    ],
+    "win": { "target": "nsis", "icon": "public/assets/keyboard-icon.ico" },
+    "linux": { "target": "tar.gz", "icon": "public/assets/keyboard-icon.png", "category": "Utility" }
+  }
+}

@@ -1,24 +1,17 @@
-# Sorties de compilation et de publication .NET
-[Bb]in/
-[Oo]bj/
-[Aa]rtifacts/
-[Pp]ublish/
-[Tt]est[Rr]esults/
+﻿# Dependencies and generated output
+/node_modules/
+/dist/
+/release/
+/publish/
+/.angular/
+/out-tsc/
 
-# Fichiers propres à l'utilisateur ou à son IDE
-.vs/
+# Editors and operating systems
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Fichiers temporaires et journaux
-*.log
-*.tmp
-*.temp
-
-# Fichiers générés par les systèmes d'exploitation
 .DS_Store
 Thumbs.db
 Desktop.ini

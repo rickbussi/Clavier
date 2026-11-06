@@ -1,41 +1,75 @@
-# Clavier Lenovo T14 Gen 1
+﻿# Clavier Lenovo T14 Gen 1
 
-Application de bureau .NET 10 / Avalonia pour afficher l’image du clavier Lenovo ThinkPad T14 Gen 1. Le même projet cible Windows et Linux.
+Application Angular utilisable dans un navigateur et dans une fenêtre Electron. Elle montre le clavier Lenovo ThinkPad T14 Gen 1 et les combinaisons à utiliser pour saisir des caractères accentués.
 
 ## Prérequis
 
-- SDK .NET 10
-- Accès à NuGet lors de la première restauration des dépendances
-- Sous Linux, les bibliothèques natives nécessaires à Avalonia doivent être présentes sur la distribution
+- Node.js 24 et npm
+- La publication Linux produit une archive portable `tar.gz`, constructible depuis Windows ou Linux
 
-## Lancer l’application
+Les commandes se lancent depuis la racine du projet.
 
-Depuis ce répertoire :
-
-```sh
-dotnet restore Clavier.slnx
-dotnet run --project Clavier.App/Clavier.App.csproj
-```
-
-L’image est incluse dans `Clavier.App/Assets/clavier-lenovo-t14-gen1.jpg` et intégrée comme ressource de l’application.
-
-## Publier et installer sous Linux x64
-
-La publication se fait sur Windows avec le SDK .NET 10. Depuis PowerShell, à la racine du projet, exécutez :
+## Navigateur
 
 ```powershell
-dotnet publish .\Clavier.App\Clavier.App.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o .\publish\linux-x64
+npm.cmd ci
+npm.cmd start
 ```
 
-Cette commande crée `publish/linux-x64`. Copiez tout le contenu de ce dossier vers un dossier sur votre machine Linux. Il contient le binaire `Clavier`, le script `installer-linux.sh` et l’icône `keyboard-icon.png`.
+Ouvrir l’adresse affichée par Angular, généralement `http://localhost:4200`.
 
-Le script source est `Clavier.App/Installer/Linux/installer-linux.sh`.
+Pour construire la version Web :
 
-Sur Linux, ouvrez un terminal dans le dossier copié et lancez l’installation :
+```powershell
+npm.cmd run build
+```
+
+Le site généré se trouve dans `dist/clavier-web/browser/`.
+
+## Application de bureau
+
+Pour lancer la fenêtre Electron en développement de production :
+
+```powershell
+npm.cmd ci
+npm.cmd run desktop
+```
+
+## Installateurs
+
+Sous Windows :
+
+```powershell
+npm.cmd ci
+npm.cmd run dist:win
+```
+
+L’installateur NSIS est généré dans `release/`.
+
+Depuis Windows :
+
+```powershell
+npm.cmd ci
+npm.cmd run dist:linux
+```
+
+La commande crée une archive Linux dans `release/`. Copiez-la sur la machine Linux, puis extrayez-la et lancez le script d’installation :
 
 ```bash
-chmod +x installer-linux.sh
-./installer-linux.sh
+tar -xzf clavier-1.0.0.tar.gz
+cd clavier-1.0.0
+bash install.sh
 ```
 
-Le script installe Clavier dans `~/.local/opt/clavier`, ajoute son icône au menu des applications et crée le lanceur. L’installation ne demande pas les droits administrateur. Le lanceur du menu supprime les variables d’environnement de l’IME Linux pour contourner un problème Avalonia/IBus avec les accents composés. La publication autonome regroupe l’application et le runtime .NET dans un seul binaire ; le script et l’icône doivent rester à côté du binaire jusqu’à l’installation.
+Le script installe Clavier dans `~/.local/opt/clavier`, ajoute l’application au menu et crée un raccourci avec son icône sur le bureau. L’installation est propre à l’utilisateur et ne demande pas les droits administrateur.
+
+Sous Linux, la même commande produit la même archive :
+
+```bash
+npm ci
+npm run dist:linux
+```
+
+L’archive contient l’application Electron, l’icône et le script d’installation. Ce paquet n’est pas au format AppImage.
+
+Le workflow GitHub Actions **Applications de bureau** peut être déclenché manuellement. Il construit chaque installateur sur le système cible et publie les fichiers en artefacts.

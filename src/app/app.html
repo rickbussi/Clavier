@@ -1,0 +1,36 @@
+<main>
+  <header>
+    <section class="characters" aria-label="Caractères accentués">
+      @for (accent of accents; track accent.character) {
+        <button type="button" [class.selected]="selected === accent.character"
+          (click)="select(accent.character)" (contextmenu)="showCharacterMenu($event, accent.character)">
+          {{ accent.character }}
+        </button>
+      }
+    </section>
+    <label class="try-row"><span>Essayer :</span>
+      <input #testInput type="text" [value]="value" (input)="value = testInput.value" (contextmenu)="showInputMenu($event)" aria-label="Essayer de saisir un caractère accentué">
+    </label>
+  </header>
+  <section class="keyboard-area" aria-label="Clavier Lenovo ThinkPad T14 Gen 1">
+    <div class="keyboard-frame" #keyboardFrame>
+      <img src="assets/clavier-lenovo-t14-gen1.jpg" alt="Clavier Lenovo ThinkPad T14 Gen 1">
+      @for (marker of markers; track $index) {
+        <div class="marker" [class.blue]="marker.color === 'blue'" [class.green]="marker.color === 'green'"
+          [style.left.px]="marker.x" [style.top.px]="marker.y" [style.width.px]="marker.width" [style.height.px]="keyboardFrame.clientHeight * 96 / 693">
+          {{ marker.label }}
+        </div>
+      }
+    </div>
+  </section>
+</main>
+@if (contextMenu; as menu) {
+  <nav class="context-menu" [style.left.px]="menu.x" [style.top.px]="menu.y" (click)="$event.stopPropagation()">
+    @if (menu.character) { <button (click)="menuAction('copy')">Copier le caractère</button> }
+    @else {
+      <button (click)="menuAction('undo')">Annuler</button><button (click)="menuAction('redo')">Rétablir</button><hr>
+      <button (click)="menuAction('cut')">Couper</button><button (click)="menuAction('copy')">Copier</button>
+      <button (click)="menuAction('paste')">Coller</button><hr><button (click)="menuAction('selectAll')">Tout sélectionner</button>
+    }
+  </nav>
+}

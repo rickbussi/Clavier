@@ -1,0 +1,20 @@
+:host { display: block; height: 100%; }
+main { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); background: #151617; }
+header { padding: 20px 24px; border-bottom: 1px solid #34363a; background: #202124; }
+.characters { display: flex; flex-wrap: wrap; gap: 6px; }
+.characters button { width: 48px; height: 40px; border: 1px solid #5f6368; border-radius: 6px; background: #34363a; color: #f1f3f4; font-family: inherit; font-size: 20px; cursor: pointer; }
+.characters button:hover { border-color: #9aa0a6; }
+.characters button.selected { background: #257a42; border-color: #3dad63; }
+.try-row { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; margin-top: 10px; color: #aeb4bc; }
+.try-row input { min-width: 0; min-height: 48px; box-sizing: border-box; padding: 8px 12px; border: 1px solid #5f6368; border-radius: 6px; background: #34363a; color: #f1f3f4; font: inherit; font-size: 24px; letter-spacing: 0.08em; outline-color: #3dad63; }
+.keyboard-area { display: grid; place-items: center; min-height: 0; overflow: hidden; }
+.keyboard-frame { position: relative; width: min(100%, calc((100vh - 175px) * 1500 / 693)); aspect-ratio: 1500 / 693; }
+.keyboard-frame img { display: block; width: 100%; height: 100%; object-fit: fill; }
+.marker { position: absolute; box-sizing: border-box; height: 13.85%; display: grid; place-items: center; border: 3px solid; font-size: clamp(12px, 2vw, 30px); font-weight: 700; pointer-events: none; }
+.marker.blue { color: #2196f3; border-color: #2196f3; background: rgb(33 150 243 / 10%); }
+.marker.green { color: #00e676; border-color: #00e676; background: rgb(0 230 118 / 10%); }
+.context-menu { position: fixed; z-index: 10; display: grid; min-width: 190px; padding: 5px; border: 1px solid #5f6368; border-radius: 6px; background: #292a2d; box-shadow: 0 4px 18px #0008; }
+.context-menu button { padding: 8px 10px; border: 0; border-radius: 3px; background: transparent; color: #f1f3f4; text-align: left; cursor: pointer; }
+.context-menu button:hover { background: #414348; }
+.context-menu hr { width: 100%; border: 0; border-top: 1px solid #45474c; }
+@media (max-width: 640px) { header { padding: 12px; } .characters button { width: 39px; } .keyboard-frame { width: min(100%, calc((100vh - 225px) * 1500 / 693)); } }
