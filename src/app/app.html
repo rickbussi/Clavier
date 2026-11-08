@@ -14,7 +14,7 @@
   </header>
   <section class="keyboard-area" aria-label="Clavier Lenovo ThinkPad T14 Gen 1">
     <div class="keyboard-frame" #keyboardFrame>
-      <img src="assets/clavier-lenovo-t14-gen1-bleu.png" alt="Clavier Lenovo ThinkPad T14 Gen 1 dans des tons bleu ardoise">
+      <img src="assets/clavier-lenovo-t14-gen1.png" alt="Clavier Lenovo ThinkPad T14 Gen 1">
       @for (marker of markers; track $index) {
         <div class="marker" [class.blue]="marker.color === 'blue'" [class.green]="marker.color === 'green'"
           [style.left.px]="marker.x" [style.top.px]="marker.y" [style.width.px]="marker.width" [style.height.px]="keyboardFrame.clientHeight * 96 / 693">
