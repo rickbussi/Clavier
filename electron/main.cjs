@@ -1,4 +1,4 @@
-const { app, BrowserWindow, net, protocol } = require('electron');
+const { app, BrowserWindow, Menu, net, protocol } = require('electron');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
@@ -10,6 +10,7 @@ let mainWindow;
 const appRoot = path.join(__dirname, '..', 'dist', 'clavier-web', 'browser');
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(null);
   protocol.handle('clavier', async (request) => {
     const url = new URL(request.url);
     if (url.host !== 'app') return new Response('Not found', { status: 404 });
